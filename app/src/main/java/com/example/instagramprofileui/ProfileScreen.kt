@@ -15,12 +15,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ProfileScreen(){
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(20.dp)
-    ){
-        TopBar(name = "gulnaragallery")
-        Spacer(modifier = Modifier.height(4.dp))
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopBar(name = "gulnara_azizova_gallery")
+        Spacer(modifier = Modifier.height(5.dp))
     }
 }
 
@@ -35,12 +32,6 @@ fun TopBar(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        Icon(
-            modifier = modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.baseline_arrow_back),
-            contentDescription = "Return back",
-            tint = Color.Black
-        )
         Text(
             text = name,
             overflow = TextOverflow.Ellipsis,
@@ -51,32 +42,21 @@ fun TopBar(
             painter = painterResource(id = R.drawable.baseline_notifications),
             contentDescription = "Notifications",
             tint = Color.Black,
-            modifier = modifier.size(30.dp)
+            modifier = Modifier.size(24.dp)
         )
         Icon(
             painter = painterResource(id = R.drawable.baseline_create),
-            contentDescription = "Create",
+            contentDescription = "Notifications",
             tint = Color.Black,
-            modifier = modifier.size(30.dp)
+            modifier = Modifier.size(24.dp)
         )
         Icon(
             painter = painterResource(id = R.drawable.baseline_menu),
-            contentDescription = "Menu",
+            contentDescription = "Notifications",
             tint = Color.Black,
-            modifier = modifier.size(30.dp)
+            modifier = Modifier.size(24.dp)
         )
     }
 }
 
-@Composable
-fun ProfileSection(
-    modifier: Modifier = Modifier
-){
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
 
-    ) {
-
-    }
-}
