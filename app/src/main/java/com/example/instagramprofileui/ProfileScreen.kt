@@ -13,6 +13,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -21,8 +23,10 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ProfileScreen(){
     Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(name = "gulnara_azizova_gallery")
+        TopBar(name = "gulllnaara_azizzova_gallery", modifier = Modifier
+            .padding(10.dp))
         Spacer(modifier = Modifier.height(5.dp))
+        ProfileSection()
     }
 }
 
@@ -40,25 +44,26 @@ fun TopBar(
         Text(
             text = name,
             overflow = TextOverflow.Ellipsis,
+            color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp
         )
         Icon(
             painter = painterResource(id = R.drawable.baseline_notifications),
             contentDescription = "Notifications",
-            tint = Color.Black,
+            tint = Color.White,
             modifier = Modifier.size(24.dp)
         )
         Icon(
             painter = painterResource(id = R.drawable.baseline_create),
             contentDescription = "Notifications",
-            tint = Color.Black,
+            tint = Color.White,
             modifier = Modifier.size(24.dp)
         )
         Icon(
             painter = painterResource(id = R.drawable.baseline_menu),
             contentDescription = "Notifications",
-            tint = Color.Black,
+            tint = Color.White,
             modifier = Modifier.size(24.dp)
         )
     }
@@ -81,7 +86,19 @@ fun ProfileSection(
                     .size(100.dp)
                     .weight(3f)
             )
+            Spacer(modifier = Modifier.width(16.dp))
+            StatSection(modifier = Modifier.weight(7f))
         }
+        ProfileDescription(
+            fullName = "Gulnara Azizova",
+            description = "ada||bsit 2024\n" +
+                    "photography and design enthusiast||kpop and kdrama lover\n" +
+                    "Android Mobile Development Enthusiast\n" +
+                    "꿈만 꾸지말고 꿈이되어라",
+            url = "https://github.com/gazizovaa",
+            followedBy = listOf("j.m", "nialhoran"),
+            otherFollowers = 54
+        )
     }
 }
 
@@ -97,7 +114,7 @@ fun RoundProfilePhoto(
             .aspectRatio(1f, matchHeightConstraintsFirst = true)
             .border(
                 width = 1.dp,
-                color = Color.LightGray,
+                color = Color.Gray,
                 shape = CircleShape
             )
             .padding(2.dp)
@@ -132,10 +149,78 @@ fun ProfileStatus(
         Text(
             text = numberText,
             fontWeight = FontWeight.Bold,
+            color = Color.White,
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.height(4.dp))
-        Text(text = text)
+        Text(
+            text = text,
+            color = Color.White
+        )
+    }
+}
+
+@Composable
+fun ProfileDescription(
+    fullName: String,
+    description: String,
+    url: String,
+    followedBy: List<String>,
+    otherFollowers: Int
+){
+    val letterSpacing =  0.5.sp
+    val lineHeight = 20.sp
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp)
+    ) {
+        Text(
+            text = fullName,
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = letterSpacing,
+            lineHeight = lineHeight
+        )
+        Text(
+            text = description,
+            color = Color.White,
+            letterSpacing = letterSpacing,
+            lineHeight = lineHeight
+        )
+        Text(
+            text = url,
+            color = Color(0xFF3D3D91),
+            letterSpacing = letterSpacing,
+            lineHeight = lineHeight
+        )
+        if(followedBy.isNotEmpty()){
+            Text(
+                text = buildAnnotatedString {
+                    val boldStyle = SpanStyle(
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                    append("Followed by ")
+                    followedBy.forEachIndexed { index, name ->
+                        pushStyle(boldStyle)
+                        append(name)
+                        pop()
+                        if(index < followedBy.size - 1){
+                            append(", ")
+                        }
+                    }
+                    if(otherFollowers > 2){
+                        append(" and ")
+                        pushStyle(boldStyle)
+                        append("$otherFollowers others")
+                    }
+                },
+                letterSpacing = letterSpacing,
+                lineHeight = lineHeight
+            )
+        }
     }
 }
 
