@@ -1,9 +1,11 @@
 package com.example.instagramprofileui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -27,6 +30,8 @@ fun ProfileScreen(){
             .padding(10.dp))
         Spacer(modifier = Modifier.height(5.dp))
         ProfileSection()
+        Spacer(modifier = Modifier.height(20.dp))
+        ButtonsSection()
     }
 }
 
@@ -90,11 +95,11 @@ fun ProfileSection(
             StatSection(modifier = Modifier.weight(7f))
         }
         ProfileDescription(
-            fullName = "Gulnara Azizova",
-            description = "ada||bsit 2024\n" +
-                    "photography and design enthusiast||kpop and kdrama lover\n" +
-                    "Android Mobile Development Enthusiast\n" +
-                    "꿈만 꾸지말고 꿈이되어라",
+            fullName = "Gulnara Azizova \uD83D\uDC8C",
+            description = "ada||bsit \uD83C\uDF93 \n" +
+                    "photography and design enthusiast||kpop and kdrama lover ✨\n" +
+                    "Android Mobile Development Enthusiast \uD83D\uDCF1 \n" +
+                    "꿈만 꾸지말고 꿈이되어라 \uD83D\uDD2E",
             url = "https://github.com/gazizovaa",
             followedBy = listOf("j.m", "nialhoran"),
             otherFollowers = 54
@@ -197,6 +202,7 @@ fun ProfileDescription(
         )
         if(followedBy.isNotEmpty()){
             Text(
+                color = Color.White,
                 text = buildAnnotatedString {
                     val boldStyle = SpanStyle(
                         color = Color.White,
@@ -219,6 +225,76 @@ fun ProfileDescription(
                 },
                 letterSpacing = letterSpacing,
                 lineHeight = lineHeight
+            )
+        }
+    }
+}
+
+@Composable
+fun ButtonsSection(
+    modifier: Modifier = Modifier
+){
+    val minWidth = 140.dp
+    val height = 30.dp
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = modifier
+    ) {
+        ActionButton(
+            text = "Following",
+            modifier = Modifier
+                .defaultMinSize(minWidth = minWidth)
+                .height(height = height)
+                .background(Color.Black)
+        )
+        ActionButton(
+            text = "Message",
+            modifier = Modifier
+                .defaultMinSize(minWidth = minWidth)
+                .height(height = height)
+                .background(Color.Black)
+        )
+        ActionButton(
+            text = "Email",
+            modifier = Modifier
+                .defaultMinSize(minWidth = minWidth)
+                .height(height = height)
+                .background(Color.Black)
+        )
+    }
+}
+
+@Composable
+fun ActionButton(
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    icon: ImageVector? = null
+){
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .border(
+                width = 2.dp,
+                color = Color.White,
+                shape = RoundedCornerShape(5.dp)
+            )
+            .padding(6.dp)
+    ) {
+        if(text != null){
+            Text(
+                text = text,
+                color = Color.White,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 13.sp
+            )
+        }
+
+        if(icon != null){
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = Color.White
             )
         }
     }
