@@ -3,5 +3,9 @@
 📝In this repository, I am working on making the profile page of Instagram in Jetpack Compose. The layout arrangement of the app consists of various sections, such as TopBar, Profile image and status together in one section, Profile description, Story Highlightes in another section, Buttons section for editing and sharing profile, and Tab View (meant for switching the tabs. The overall UI of the app is a big column of everything. 
 
 
+📌The website for emojis used in profile description of Instagram App UI:
+https://emojipedia.org/emojipedia
+
+
      
 
