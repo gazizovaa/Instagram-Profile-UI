@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.instagramprofileui.ui.theme.Gray
 
 @Composable
 fun ProfileScreen(){
@@ -31,7 +32,8 @@ fun ProfileScreen(){
         Spacer(modifier = Modifier.height(5.dp))
         ProfileSection()
         Spacer(modifier = Modifier.height(20.dp))
-        ButtonsSection()
+        ButtonsSection(modifier = Modifier.fillMaxWidth())
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
@@ -234,7 +236,7 @@ fun ProfileDescription(
 fun ButtonsSection(
     modifier: Modifier = Modifier
 ){
-    val minWidth = 140.dp
+    val minWidth = 130.dp
     val height = 30.dp
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
@@ -245,21 +247,21 @@ fun ButtonsSection(
             modifier = Modifier
                 .defaultMinSize(minWidth = minWidth)
                 .height(height = height)
-                .background(Color.Black)
+                .background(Gray)
         )
         ActionButton(
             text = "Message",
             modifier = Modifier
                 .defaultMinSize(minWidth = minWidth)
                 .height(height = height)
-                .background(Color.Black)
+                .background(Gray)
         )
         ActionButton(
             text = "Email",
             modifier = Modifier
                 .defaultMinSize(minWidth = minWidth)
                 .height(height = height)
-                .background(Color.Black)
+                .background(Gray)
         )
     }
 }
