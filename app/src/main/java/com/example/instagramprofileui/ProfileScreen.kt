@@ -1,10 +1,13 @@
 package com.example.instagramprofileui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -19,9 +22,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -32,10 +37,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.instagramprofileui.ui.theme.Gray
 
+@ExperimentalFoundationApi
 @Composable
 fun ProfileScreen(){
+    var selectedtTabIndex by remember {
+        mutableStateOf(0)
+    }
     Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(name = "gulllnaara_azizzova_gallery", modifier = Modifier
+        TopBar(
+            name = "gulllnaara_azizzova_gallery",
+            modifier = Modifier
             .padding(10.dp))
         Spacer(modifier = Modifier.height(5.dp))
         ProfileSection()
@@ -65,6 +76,34 @@ fun ProfileScreen(){
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         )
+        Spacer(modifier = Modifier.height(10.dp))
+        PostTabView(
+            imageWithTexts = listOf(
+                ImageWithText(
+                    image = painterResource(id = R.drawable.baseline_grid),
+                    text = "Posts"
+                ),
+                ImageWithText(
+                    image = painterResource(id = R.drawable.ic_reels),
+                    text = "Reels"
+                ),
+                ImageWithText(
+                    image = painterResource(id = R.drawable.baseline_person),
+                    text = "Profile"
+                ),
+            )
+        ){
+            selectedtTabIndex = it
+        }
+        when(selectedtTabIndex){
+            0 -> PostsSection(
+                posts = listOf(
+                    painterResource(id = R.drawable.sunset),
+                    painterResource(id = R.drawable.south_korea)
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -166,7 +205,7 @@ fun StatSection(modifier: Modifier = Modifier){
         modifier = modifier
     ) {
         ProfileStatus(numberText = "11", text = "Posts")
-        ProfileStatus(numberText = "485", text = "Followers")
+        ProfileStatus(numberText = "486", text = "Followers")
         ProfileStatus(numberText = "828", text = "Following")
     }
 }
@@ -268,7 +307,7 @@ fun ButtonsSection(
     val minWidth = 130.dp
     val height = 30.dp
     Row(
-        horizontalArrangement = Arrangement.SpaceAround,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = modifier
     ) {
         ActionButton(
@@ -382,8 +421,8 @@ fun PostTabView(
                 selectedContentColor = Color.White,
                 unselectedContentColor = inactiveColor,
                 onClick = {
-                    selectedTabIndex = 0
-                    onTabSelected(0)
+                    selectedTabIndex = index
+                    onTabSelected(index)
                 })
             {
                 Icon(
@@ -399,6 +438,32 @@ fun PostTabView(
     }
 }
 
+@ExperimentalFoundationApi
+@Composable
+fun PostsSection(
+    posts: List<Painter>,
+    modifier: Modifier = Modifier
+){
+    LazyVerticalGrid(
+         GridCells.Fixed(3),
+        modifier = modifier
+            .scale(1.0f)
+    ){
+        items(posts.size){
+            Image(
+                painter = posts[it],
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black,
 
+                    )
+            )
+        }
+    }
+}
 
 
