@@ -8,8 +8,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,19 +44,19 @@ fun ProfileScreen(){
         Spacer(modifier = Modifier.height(20.dp))
         HighlightsSection(
             highlights = listOf(
-                StoryHighlight(
+                ImageWithText(
                     image = painterResource(id = R.drawable.photos),
                     text = "photos"
                 ),
-                StoryHighlight(
+                ImageWithText(
                     image = painterResource(id = R.drawable.videos_prt3),
                     text = "videos|part3"
                 ),
-                StoryHighlight(
+                ImageWithText(
                     image = painterResource(id = R.drawable.videos_prt2),
                     text = "videos|part2"
                 ),
-                StoryHighlight(
+                ImageWithText(
                     image = painterResource(id = R.drawable.videos_prt1),
                     text = "videos|part1"
                 ),
@@ -328,7 +334,7 @@ fun ActionButton(
 @Composable
 fun HighlightsSection(
     modifier: Modifier = Modifier,
-    highlights: List<StoryHighlight>
+    highlights: List<ImageWithText>
 ){
     LazyRow(modifier = modifier) {
         items(highlights.size){
@@ -352,5 +358,47 @@ fun HighlightsSection(
         }
     }
 }
+
+@Composable
+fun PostTabView(
+    modifier: Modifier = Modifier,
+    imageWithTexts: List<ImageWithText>,
+    onTabSelected: (selectedIndex: Int) -> Unit
+){
+    var selectedTabIndex by remember {
+        mutableStateOf(0)
+    }
+
+    val inactiveColor = Color(0xFF777777)
+    TabRow(
+        selectedTabIndex = selectedTabIndex,
+        backgroundColor = Color.Transparent,
+        contentColor = Color.White,
+        modifier = modifier
+    ){
+        imageWithTexts.forEachIndexed { index, item ->
+            Tab(
+                selected = selectedTabIndex == index,
+                selectedContentColor = Color.White,
+                unselectedContentColor = inactiveColor,
+                onClick = {
+                    selectedTabIndex = 0
+                    onTabSelected(0)
+                })
+            {
+                Icon(
+                    painter = item.image,
+                    contentDescription = item.text,
+                    tint = if(selectedTabIndex == index) Color.White else inactiveColor,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .size(20.dp)
+                )
+            }
+        }
+    }
+}
+
+
 
 
