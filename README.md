@@ -9,3 +9,5 @@ https://emojipedia.org/emojipedia
 
      
 
+![instagram_ui_screenshot](https://github.com/gazizovaa/Instagram-Profile-UI/assets/78263828/c9091ca1-8c0a-437c-b5c3-257a62b2a160)
+
