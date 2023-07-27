@@ -6,8 +6,5 @@
 📌The website for emojis used in profile description of Instagram App UI:
 https://emojipedia.org/emojipedia
 
-
-     
-
-![instagram_ui_screenshot](https://github.com/gazizovaa/Instagram-Profile-UI/assets/78263828/c9091ca1-8c0a-437c-b5c3-257a62b2a160)
+https://github.com/gazizovaa/Instagram-Profile-UI/assets/78263828/bad3b1fa-939d-4d2c-9246-024ea7ab5aa4
 
