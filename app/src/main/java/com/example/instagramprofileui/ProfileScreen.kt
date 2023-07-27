@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -19,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +36,29 @@ fun ProfileScreen(){
         Spacer(modifier = Modifier.height(20.dp))
         ButtonsSection(modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(20.dp))
+        HighlightsSection(
+            highlights = listOf(
+                StoryHighlight(
+                    image = painterResource(id = R.drawable.photos),
+                    text = "photos"
+                ),
+                StoryHighlight(
+                    image = painterResource(id = R.drawable.videos_prt3),
+                    text = "videos|part3"
+                ),
+                StoryHighlight(
+                    image = painterResource(id = R.drawable.videos_prt2),
+                    text = "videos|part2"
+                ),
+                StoryHighlight(
+                    image = painterResource(id = R.drawable.videos_prt1),
+                    text = "videos|part1"
+                ),
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        )
     }
 }
 
@@ -98,9 +123,7 @@ fun ProfileSection(
         }
         ProfileDescription(
             fullName = "Gulnara Azizova \uD83D\uDC8C",
-            description = "ada||bsit \uD83C\uDF93 \n" +
-                    "photography and design enthusiast||kpop and kdrama lover ✨\n" +
-                    "Android Mobile Development Enthusiast \uD83D\uDCF1 \n" +
+            description = "ada||bsit \uD83C\uDF93 | photography and design enthusiast | kpop and kdrama lover ✨\n" +
                     "꿈만 꾸지말고 꿈이되어라 \uD83D\uDD2E",
             url = "https://github.com/gazizovaa",
             followedBy = listOf("j.m", "nialhoran"),
@@ -298,6 +321,34 @@ fun ActionButton(
                 contentDescription = null,
                 tint = Color.White
             )
+        }
+    }
+}
+
+@Composable
+fun HighlightsSection(
+    modifier: Modifier = Modifier,
+    highlights: List<StoryHighlight>
+){
+    LazyRow(modifier = modifier) {
+        items(highlights.size){
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(end = 15.dp)
+            ) {
+                RoundProfilePhoto(
+                    image = highlights[it].image,
+                    modifier = Modifier.size(70.dp)
+                )
+                Text(
+                    text = highlights[it].text,
+                    color = Color.White,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
